@@ -7,8 +7,8 @@ Created on Thu Dec 14 16:12:43 2017
 
 #imports
 from flask import Flask, render_template, json, request, session, redirect
-from werkzeug import generate_password_hash, check_password_hash
-from flask.ext.mysql import MySQL
+# from werkzeug import generate_password_hash, check_password_hash
+from flaskext.mysql import MySQL
 
 #initialize the flask and SQL Objects
 app = Flask(__name__)
@@ -166,7 +166,7 @@ def addWish():
             cursor.callproc('sp_addWish',(_title,_description,_user))
             data = cursor.fetchall()
  
-            if len(data) is 0:
+            if len(data) == 0:
                 conn.commit()
                 print("finished executing addWish")
                 return redirect('/userHome')
